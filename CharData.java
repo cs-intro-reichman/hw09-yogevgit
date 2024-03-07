@@ -12,7 +12,7 @@ public class CharData {
 	// a probability (number between 0 and 1)
 	double p;    
 
-	// a commulative probability (number between 0 and 1)
+	// a comulative probability (number between 0 and 1)
 	double cp;
 
 	/** Creates and initializes a character data object. */
@@ -21,6 +21,25 @@ public class CharData {
 		this.count = 1;
 		this.p = 0;
 		this.cp = 0;
+	}
+	public double getCount() {
+		return this.count;
+	}
+	public void setCount(int count) {
+		this.count=count;
+	}
+	public double getP() {
+		return this.p;
+	}
+	public void setP(double p) {
+		this.p=p;
+	}
+
+	public double getCP() {
+		return this.cp;
+	}
+	public void setCP(double cp) {
+		this.cp=cp;
 	}
 
 	/** Checks if the character of this CharData object equals the given character. */
