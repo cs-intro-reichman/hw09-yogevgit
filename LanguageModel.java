@@ -41,10 +41,11 @@ public class LanguageModel {
         while (txt.isEmpty()==false) {
             chr = txt.readChar();
             List newlist = CharDataMap.get(strb.toString());
-            if (newlist == null){
+            if (newlist == null)
+            {
                 newlist = new List();
                 CharDataMap.put(strb.toString(),newlist);
-                }
+            }
                 newlist.update(chr);
                 strb.append(chr);
                 strb = new StringBuilder(strb.substring(1));
@@ -96,9 +97,8 @@ public class LanguageModel {
 	 * @return the generated text
 	 */
 	public String generate(String initialText, int textLength) {
-        if(initialText.length() < windowLength){
-            return initialText;
-        }
+        if(initialText.length() < windowLength) return initialText;
+        
         StringBuilder preresult = new StringBuilder(initialText.substring(initialText.length() - windowLength));
         StringBuilder result = preresult;
 
