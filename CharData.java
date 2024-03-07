@@ -12,7 +12,7 @@ public class CharData {
 	// a probability (number between 0 and 1)
 	double p;    
 
-	// a commulative probability (number between 0 and 1)
+	// a comulative probability (number between 0 and 1)
 	double cp;
 
 	/** Creates and initializes a character data object. */
