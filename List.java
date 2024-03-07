@@ -45,7 +45,7 @@ public class List {
         for (int i = 0; i < size; i++)
         {
             stringbuild.append(current.toString());
-            if (i < (size - 1)) stringbuild.append("\n");
+            if (i < (size - 1)) stringbuild.append(" ");
             current = current.next;
         }
         String stringc = stringbuild.toString();
