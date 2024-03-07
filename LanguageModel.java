@@ -29,11 +29,27 @@ public class LanguageModel {
         this.windowLength = windowLength;
         randomGenerator = new Random();
         CharDataMap = new HashMap<String, List>();
+        
     }
 
     /** Builds a language model from the text in the given file (the corpus). */
 	public void train(String fileName) {
-		// Your code goes here
+		In txt = new In(fileName);
+        int count = 0;
+        List newlist = new List();
+        while(!txt.isEmpty())
+        {
+            newlist.update(txt.readChar());
+            count++;
+        }
+        for( int i = 0; i < newlist.getSize(); i++)
+        {
+            newlist.get(i).setP((newlist.get(i).getCount())/count);
+            if (i == 0) newlist.get(i).setCP(newlist.get(i).getP());
+            else newlist.get(i).setCP(setCP(newlist.get(i).getP())
+        }
+        
+
 	}
 
     // Computes and sets the probabilities (p and cp fields) of all the
