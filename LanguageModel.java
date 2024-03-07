@@ -58,31 +58,33 @@ public class LanguageModel {
     // Computes and sets the probabilities (p and cp fields) of all the
 	// characters in the given list. */
 	public  void calculateProbabilities(List probs) {
-		int numberOfChars = 0;
-        for (int i = 0; i < probs.getSize(); i++){
-            numberOfChars += probs.get(i).count;
+		int count = 0;
+        double cp = 0;
+        for (int i = 0; i < probs.getSize(); i= i+1){
+            count += probs.get(i).count;
         }
-
-        double cpProbability = 0;
-        for (int i = 0; i < probs.getSize(); i++) {
-            probs.get(i).p = ((double) probs.get(i).count) / numberOfChars;
-            probs.get(i).cp = cpProbability + probs.get(i).p;
-            cpProbability = probs.get(i).cp;
+        for (int i = 0; i < probs.getSize(); i= i+1) {
+            probs.get(i).p = (double) ((double) probs.get(i).count) /((double) count);
+            probs.get(i).cp = cp + probs.get(i).p;
+            cp = probs.get(i).cp;
         }
 	}
 
     // Returns a random character from the given probabilities list.
 	public char getRandomChar(List probs) {
-        char randomChar;
-        double randomDouble = randomGenerator.nextDouble();
+        char rndchr;
+        double rnddbl = randomGenerator.nextDouble();
 
-        for (int i = 0; i < probs.getSize(); i++){
-            if (probs.get(i).cp > randomDouble) {
-                randomChar = probs.get(i).chr;
-                return randomChar;
+        for (int i = 0; i < probs.getSize(); i= i+1)
+        {
+            if (probs.get(i).cp > rnddbl) 
+            {
+                rndchr = probs.get(i).chr;
+                return rndchr;
             }
+            else continue;
         }
-        return 'a'; // if something unexpected happened.
+        return ' '; 
     }
 
 
@@ -97,20 +99,22 @@ public class LanguageModel {
         if(initialText.length() < windowLength){
             return initialText;
         }
-        StringBuilder window = new StringBuilder(initialText.substring(initialText.length() - windowLength));
-        StringBuilder generatedText = window;
+        StringBuilder preresult = new StringBuilder(initialText.substring(initialText.length() - windowLength));
+        StringBuilder result = preresult;
 
-        while (generatedText.length() < (textLength + windowLength)){
-            List currentList = CharDataMap.get(window.toString());
-            if (currentList == null){
-                break;
+        while (result.length() < (textLength + windowLength)){
+            List currentList = CharDataMap.get(preresult.toString());
+            if (currentList == null) break;
+            else
+            {
+                result.append(getRandomChar(currentList));
+                preresult = new StringBuilder(result.substring(result.length() - windowLength));
             }
-            generatedText.append(getRandomChar(currentList));
-            window = new StringBuilder(generatedText.substring(generatedText.length() - windowLength));
         }
-
-        return generatedText.toString();
-	}
+        String result1 = result.toString();
+        return result1;
+        }
+	
 
     /** Returns a string representing the map of this language model. */
 	public String toString() {
