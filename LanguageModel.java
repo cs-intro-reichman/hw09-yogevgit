@@ -56,6 +56,7 @@ public class LanguageModel {
         }
         for (List newlist : CharDataMap.values()) {
             calculateProbabilities(newlist);
+            
         }
         }
 
